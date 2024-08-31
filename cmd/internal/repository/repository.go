@@ -1,8 +1,9 @@
 package repository
 
 import (
-	"backend/cmd/internal/models"
 	"database/sql"
+
+	"github.com/AzureHoshi/learning-go-itgenius/cmd/internal/models"
 )
 
 type DatabaseRepo interface {

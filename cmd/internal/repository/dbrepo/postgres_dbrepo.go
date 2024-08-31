@@ -1,10 +1,11 @@
 package dbrepo
 
 import (
-	"backend/cmd/internal/models"
 	"context"
 	"database/sql"
 	"time"
+
+	"github.com/AzureHoshi/learning-go-itgenius/cmd/internal/models"
 )
 
 type PostgresDBRepo struct {

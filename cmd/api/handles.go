@@ -1,7 +1,7 @@
 package main
 
 import (
-	"backend/cmd/internal/models"
+	"github.com/AzureHoshi/learning-go-itgenius/cmd/internal/models"
 	"encoding/json"
 	"errors"
 	"fmt"
