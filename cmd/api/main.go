@@ -46,7 +46,10 @@ func main() {
 	// flag.StringVar(&app.DSN, "dsn", "host=192.168.1.108 port=5432 user=postgres password=postgres dbname=postgres sslmode=disable", "Postgres Data Source Name")
 
 	// ? new code
-	dsn := fmt.Sprintf("host=%s port=%s dbname=%s user=%s password=%s sslmode=%s timezone=%s connect_timeout=%s", os.Getenv("DB_HOST"), os.Getenv("DB_PORT"), os.Getenv("DB_NAME"), os.Getenv("DB_USER"), os.Getenv("DB_PASS"), os.Getenv("DB_SSL_MODE"), os.Getenv("DB_TIMEZONE"), os.Getenv("DB_CONNECT_TIMEOUT"))
+	dsn := fmt.Sprintf("host=%s port=%s dbname=%s user=%s password=%s sslmode=%s timezone=%s connect_timeout=%s",
+		os.Getenv("DB_HOST"), os.Getenv("DB_PORT"), os.Getenv("DB_NAME"), os.Getenv("DB_USER"),
+		os.Getenv("DB_PASSWORD"), os.Getenv("DB_SSLMODE"), os.Getenv("DB_TIMEZONE"),
+		os.Getenv("DB_CONNECT_TIMEOUT"))
 
 	// อ้่างค่า DSN ไปยัง app.DSN
 	app.DSN = dsn
