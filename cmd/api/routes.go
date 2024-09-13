@@ -39,6 +39,13 @@ func (app *application) routes() http.Handler {
 		r.Get("/movies/{id}", app.GetMovie)
 		r.Get("/genres", app.AllGenres)
 
+		// Protected routes
+		// r.With(app.authRequired).Get("/admin/movies", app.MovieCatalog)
+		// r.With(app.authRequired).Get("/admin/movies/{id}", app.MovieForEdit)
+		// r.With(app.authRequired).Post("/admin/movies", app.InsertMovie)
+		// r.With(app.authRequired).Put("/admin/movies/{id}", app.UpdateMovie)
+		// r.With(app.authRequired).Delete("/admin/movies/{id}", app.DeleteMovie)
+
 		r.Route("/admin", func(r chi.Router) {
 
 			// protected routes

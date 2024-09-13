@@ -345,4 +345,9 @@ paths:
       summary: รีเฟรชโทเคน JWT
       tags:
       - Authentication
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"

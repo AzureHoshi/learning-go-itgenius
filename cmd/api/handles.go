@@ -23,7 +23,7 @@ import (
 // @Tags Authentication
 // @Accept json
 // @Produce json
-// @Param requestPayload body object true "User credentials" example({"email": "string", "password": "string"})
+// @Param requestPayload body object true "User credentials" example({{"email": "user@example.com", "password": "examplePassword123"}})
 // @Success 202 {object} map[string]interface{} "Token pairs" example({"access_token": "string", "refresh_token": "string"})
 // @Failure 400 {object} map[string]interface{} "Bad Request" example({"error": "Bad Request"})
 // @Failure 500 {object} map[string]interface{} "Internal Server Error" example({"error": "Internal Server Error"})
