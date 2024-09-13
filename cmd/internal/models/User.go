@@ -20,8 +20,6 @@ type User struct {
 
 // passwordMatch ฟังก์ชันสำหรับตรวจสอบรหัสผ่าน
 func (u *User) PasswordMatches(plaintext string) (bool, error) {
-	log.Println("u.Password:", u.Password)
-	log.Println("plaintext:", plaintext)
 	err := bcrypt.CompareHashAndPassword([]byte(u.Password), []byte(plaintext))
 	if err != nil {
 		log.Println("error comparing password", err)

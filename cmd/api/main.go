@@ -14,7 +14,7 @@ import (
 )
 
 // สร้างตัวแปรกำหนด port ที่จะใช้
-const port = 8080
+const port = 3000
 
 // สร้าง application struct สำหรับเก็บ config และ database connection
 type application struct {
@@ -28,6 +28,25 @@ type application struct {
 	CookieDomain string
 	APIKey       string
 }
+
+// @title Movie API with GO and Postgres
+// @version 1.0
+// @description This is a sample movie API with GO and Postgres
+// @termsOfService http://swagger.io/terms/
+
+// @contact.name API Support
+// @contact.url http://www.example.com/support
+// @contact.email support@swagger.io
+
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host localhost:3000
+// @BasePath /
+
+// @securityDefinitions.apikey BearerAuth
+// @in header
+// @name Authorization
 
 func main() {
 
@@ -98,9 +117,9 @@ func main() {
 	// Start the server
 	fmt.Println("Starting server on ", app.Domain)
 	log.Printf("Starting server on port %d", port)
-	err = http.ListenAndServe(fmt.Sprintf(":%d", port), app.routes())
+	err = http.ListenAndServe(fmt.Sprintf("127.0.0.1:%d", port), app.routes())
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Failed to start server: %v", err)
 	}
 
 }

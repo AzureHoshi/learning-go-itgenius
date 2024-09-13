@@ -28,3 +28,20 @@ func (app *application) authRequired(next http.Handler) http.Handler {
 		next.ServeHTTP(w, r)
 	})
 }
+
+// ฟังก์ชันสำหรับการตรวจสอบ Token ด้วย JWT
+func (app *application) JwtMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// Extract the JWT from the Authorization header
+		tokenString := r.Header.Get("Authorization")
+
+		// ตรวจสอบว่า Token ถูกส่งมาหรือไม่
+		if tokenString == "" {
+			http.Error(w, "Authorization header is required", http.StatusUnauthorized)
+			return
+		}
+
+		// If the token is not valid, pass the request to the next handler
+		next.ServeHTTP(w, r)
+	})
+}
