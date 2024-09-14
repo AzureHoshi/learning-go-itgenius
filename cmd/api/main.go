@@ -14,7 +14,7 @@ import (
 )
 
 // สร้างตัวแปรกำหนด port ที่จะใช้
-const port = 3000
+const port = 8080
 
 // สร้าง application struct สำหรับเก็บ config และ database connection
 type application struct {

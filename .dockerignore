@@ -1,0 +1,6 @@
+# Ignore build artifacts
+*.log
+*.tmp
+
+# Ignore version control directories
+.git

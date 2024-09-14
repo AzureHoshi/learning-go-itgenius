@@ -1,27 +1,54 @@
-services:
-  postgres:
-    image: postgres:16.3
-    container_name: postgres16.3
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: gosampledb
-    ports:
-      - '5432:5432'
-    volumes:
-      - ./postgres-data:/var/lib/postgresql/data
+networks:
+  goapi_network:
+    driver: bridge
+    name: goapi_network
 
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin4
+services:
+  # Postgres Database
+  pgdb:
+    image: postgres:15.8
+    container_name: postgres_db
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-      - '5050:80'
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: gosampledb
     volumes:
-      - ./pgadmin-data:/var/lib/pgadmin
+      - ./postgresdb:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d
+    ports:
+      - '6432:5432'
+    restart: always
+    networks:
+      - goapi_network
+
+  # Go API
+  goapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: go_sample_api
+    ports:
+      - '7070:8080'
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=gosampledb
+      - DB_USER=admin
+      - DB_PASSWORD=admin
+      - DB_SSLMODE=disable
+      - DB_TIMEZONE=UTC
+      - DB_CONNECT_TIMEOUT=5
+      - JWT_SECRET=verysecret
+      - JWT_ISSUER=example.com
+      - JWT_AUDIENCE=example.com
+      - COOKIE_DOMAIN=localhost
+      - DOMAIN=example.com
+      - API_KEY=b41447e6319d1cd467306735632ba733
+    depends_on:
+      - pgdb
+    restart: always
+    networks:
+      - goapi_network
 
 volumes:
   postgres-data:
-  pgadmin-data:
